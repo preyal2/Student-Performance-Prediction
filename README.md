@@ -3,7 +3,7 @@
 # 🎯 Student Performance Prediction System
 ### *End-to-End Production Machine Learning Regression Pipeline, REST API & Interactive Web Application*
 
-[![Live Deployment](https://img.shields.io/badge/Live%20Deployment-GitHub%20Pages-brightgreen?logo=githubpages&logoColor=white)](https://preyal2.github.io/Student-Performance-Prediction/)
+[![Live Deployment](https://img.shields.io/badge/Live%20Deployment-GitHub%20Pages-brightgreen?logo=githubpages&logoColor=white)](https://preyal2.github.io/Student-Performance-Prediction/Development/frontend/)
 [![Model Prediction Notebook](https://img.shields.io/badge/Model%20Prediction-Jupyter%20Notebook-orange.svg?logo=jupyter&logoColor=white)](https://github.com/preyal2/Student-Performance-Prediction/blob/main/notebook.ipynb)
 [![Development Workspace](https://img.shields.io/badge/Development-Frontend%20%26%20Backend-blueviolet.svg?logo=folder&logoColor=white)](Development/)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
@@ -21,7 +21,7 @@
 ### 🚀 Quick Access Links
 | Resource | Direct Link | Description |
 | :--- | :--- | :--- |
-| **🌐 Live Web Deployment** | [**preyal2.github.io/Student-Performance-Prediction**](https://preyal2.github.io/Student-Performance-Prediction/) | Interactive in-browser prediction application |
+| **🌐 Live Web Deployment** | [**preyal2.github.io/Student-Performance-Prediction/Development/frontend/**](https://preyal2.github.io/Student-Performance-Prediction/Development/frontend/) | Interactive in-browser prediction application |
 | **📊 Model Prediction & EDA** | [**notebook.ipynb (GitHub Viewer)**](https://github.com/preyal2/Student-Performance-Prediction/blob/main/notebook.ipynb) | Complete data analysis, training & experimentation notebook |
 | **🛠️ Development Workspace** | [**Development/ Folder**](Development/) | Modular frontend & backend source code with full engineering guide |
 
@@ -33,14 +33,14 @@
 
 The system features a single-file, production-grade interactive dashboard deployed directly on **GitHub Pages**:
 
-👉 **Deployment Link:** [https://preyal2.github.io/Student-Performance-Prediction/](https://preyal2.github.io/Student-Performance-Prediction/)
+👉 **Deployment Link:** [https://preyal2.github.io/Student-Performance-Prediction/Development/frontend/](https://preyal2.github.io/Student-Performance-Prediction/Development/frontend/)
 
 ### Web Application Capabilities
 - **⚡ Zero-Latency In-Browser Engine:** Uses mathematically aligned regression weights derived from the trained pipeline, allowing instantaneous real-time inference on any device without backend requirements.
 - **🔄 Dual Execution Modes:** Easily toggle between the client-side browser engine and the local/remote multi-threaded Flask REST API (`http://localhost:9696/predict`).
 - **🎯 1-Click Persona Presets:** Pre-configured student archetypes (*High Honor Student*, *STEM Oriented*, *Balanced Achiever*, *Growth & Support*) for instant exploration.
 - **📊 Real-Time Visual Metrics:** Score meter, performance tier badges (A+ Mastery down to Needs Intervention), comparative progress bars (Math vs Reading vs Writing vs Average), and factor impact breakdowns.
-- **📄 Single-File Architecture:** Built entirely into a single [`index.html`](index.html) file combining semantic HTML5, glassmorphic CSS, and responsive JavaScript.
+- **📄 Single-File Architecture:** Built entirely into a single [`index.html`](Development/frontend/index.html) file combining semantic HTML5, glassmorphic CSS, and responsive JavaScript.
 
 ---
 
@@ -124,7 +124,7 @@ The serving microservice in `Development/backend/` exposes clean RESTful endpoin
 
 ### 1. Web Application & Info
 - **Endpoint:** `GET /`
-- **Description:** Returns the interactive web frontend (`index.html`) or API service status.
+- **Description:** Returns the interactive web frontend or API service status.
 
 ### 2. Health Check
 - **Endpoint:** `GET /health`
@@ -227,25 +227,26 @@ Student-Performance-Prediction/
 ├── data/
 │   └── stud.csv               # Kaggle student performance dataset (1,000 records)
 │
-├── Development/               # 🛠️ Modular development workspace
-│   ├── README.md              # Development workspace setup & execution guide
-│   ├── frontend/              # 🎨 Frontend Web Application
-│   │   └── index.html         # Interactive single-file web dashboard
-│   └── backend/               # ⚙️ Backend ML & REST API
-│       ├── predict.py         # Flask REST API microservice
+├── Development/               # 🛠️ Main Development Workspace
+│   ├── README.md              # Complete subsystem guide & execution instructions
+│   │
+│   ├── frontend/              # 🎨 Frontend Subsystem
+│   │   └── index.html         # Interactive web application (in-browser ML engine)
+│   │
+│   └── backend/               # ⚙️ Backend ML & API Subsystem
+│       ├── predict.py         # Production Flask REST API with Waitress WSGI
 │       ├── predict_test.py    # Automated test client script
-│       ├── train.py           # Training pipeline & Bayesian optimization
+│       ├── train.py           # ML training, cross-validation & Bayesian search
 │       ├── model.bin          # Trained Scikit-Learn / XGBoost pipeline artifact
 │       ├── Dockerfile         # Multi-stage container specification
 │       ├── requirements.txt   # Pip package dependencies
 │       ├── pyproject.toml     # Poetry packaging configuration
-│       └── poetry.lock        # Deterministic dependency lockfile
+│       └── poetry.lock        # Deterministic lockfile
 │
-├── index.html                 # Production Web App (serves GitHub Pages)
 ├── notebook.ipynb             # Full exploratory data analysis & model prediction experiments
 ├── .gitignore                 # Version control exclusions
-├── LICENSE                    # MIT Open Source License
-└── README.md                  # Comprehensive technical documentation
+├── LICENSE                    # MIT Open Source License (Preyal Modi)
+└── README.md                  # Comprehensive technical documentation & quick access links
 ```
 
 ---

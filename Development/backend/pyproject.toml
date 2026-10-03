@@ -1,7 +1,7 @@
 ﻿[tool.poetry]
 name = "student-performance-prediction"
 version = "0.1.0"
-description = "End-to-End Machine Learning regression pipeline predicting student academic performance using Scikit-Learn, CatBoost & XGBoost with Bayesian Optimization, Flask REST API, and Docker containerization."
+description = "End-to-End Student Academic Performance Prediction System using Python 3.11, Scikit-Learn & XGBoost with Bayesian Tuning, Flask WSGI API, Docker containerization, and interactive Web App."
 authors = ["Preyal Modi <modipreyal@gmail.com>"]
 readme = "README.md"
 license = "MIT"

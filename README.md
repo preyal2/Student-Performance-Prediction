@@ -5,7 +5,7 @@
 
 [![Live Deployment](https://img.shields.io/badge/Live%20Deployment-GitHub%20Pages-brightgreen?logo=githubpages&logoColor=white)](https://preyal2.github.io/Student-Performance-Prediction/)
 [![Model Prediction Notebook](https://img.shields.io/badge/Model%20Prediction-Jupyter%20Notebook-orange.svg?logo=jupyter&logoColor=white)](https://github.com/preyal2/Student-Performance-Prediction/blob/main/notebook.ipynb)
-[![Development Folder](https://img.shields.io/badge/Development-Frontend%20%26%20Backend-blueviolet.svg?logo=folder&logoColor=white)](Development/)
+[![Development Workspace](https://img.shields.io/badge/Development-Frontend%20%26%20Backend-blueviolet.svg?logo=folder&logoColor=white)](Development/)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.3.2-F7931E.svg?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-2.0.2-red.svg)](https://xgboost.readthedocs.io/)
@@ -23,8 +23,7 @@
 | :--- | :--- | :--- |
 | **🌐 Live Web Deployment** | [**preyal2.github.io/Student-Performance-Prediction**](https://preyal2.github.io/Student-Performance-Prediction/) | Interactive in-browser prediction application |
 | **📊 Model Prediction & EDA** | [**notebook.ipynb (GitHub Viewer)**](https://github.com/preyal2/Student-Performance-Prediction/blob/main/notebook.ipynb) | Complete data analysis, training & experimentation notebook |
-| **🛠️ Development Workspace** | [**Development/ Folder**](Development/) | Modular frontend & backend source code |
-| **📖 Developer Guide** | [**DEVELOPMENT.md**](DEVELOPMENT.md) | In-depth engineering specifications & setup playbook |
+| **🛠️ Development Workspace** | [**Development/ Folder**](Development/) | Modular frontend & backend source code with full engineering guide |
 
 ---
 
@@ -52,17 +51,15 @@ The repository is modularly organized with a dedicated [`Development/`](Developm
 ```
 Development/
 │
-├── frontend/
-│   └── index.html             # Interactive Web Application (Single-File)
-│                              # - In-browser mathematical regression engine
-│                              # - Responsive glassmorphic UI
-│                              # - Real-time score analytics & presets
-│                              # - Dual engine toggle (In-Browser / Flask API)
+├── README.md                  # Development workspace guide & setup instructions
 │
-└── backend/
-    ├── predict.py             # Production Flask REST API & WSGI serving
+├── frontend/                  # 🎨 Frontend Web Application
+│   └── index.html             # Interactive single-file web dashboard (in-browser ML engine)
+│
+└── backend/                   # ⚙️ Backend ML & REST API
+    ├── predict.py             # Production Flask REST API & Waitress WSGI serving
     ├── predict_test.py        # Automated endpoint test client
-    ├── train.py               # ML training, cross-validation & serialization
+    ├── train.py               # ML training, cross-validation & Bayesian search
     ├── model.bin              # Trained Scikit-Learn / XGBoost pipeline artifact
     ├── Dockerfile             # Multi-stage container specification
     ├── requirements.txt       # Standard pip package dependencies
@@ -70,7 +67,7 @@ Development/
     └── poetry.lock            # Deterministic dependency lockfile
 ```
 
-👉 For detailed engineering workflows, see the [Development README](Development/README.md) and [DEVELOPMENT.md](DEVELOPMENT.md).
+👉 For complete subsystem run commands and local setup, see the [Development README](Development/README.md).
 
 ---
 
@@ -123,7 +120,7 @@ All models were evaluated under identical 5-fold cross-validation splits using R
 
 ## 🔌 REST API Reference
 
-The serving microservice exposes clean RESTful endpoints running on port `9696`.
+The serving microservice in `Development/backend/` exposes clean RESTful endpoints running on port `9696`.
 
 ### 1. Web Application & Info
 - **Endpoint:** `GET /`
@@ -169,12 +166,12 @@ The serving microservice exposes clean RESTful endpoints running on port `9696`.
 
 ## 🚀 Getting Started
 
-### Option A: Using Poetry (Recommended)
+### Backend Execution (`Development/backend/`)
 
+#### Option A: Using Poetry (Recommended)
 ```bash
-# 1. Clone the repository
-git clone https://github.com/preyal2/Student-Performance-Prediction.git
-cd Student-Performance-Prediction
+# 1. Navigate to backend directory
+cd Development/backend
 
 # 2. Install dependencies via Poetry
 poetry install
@@ -185,9 +182,10 @@ poetry run python -m waitress --listen=0.0.0.0:9696 predict:app
 # 4. Open http://localhost:9696 in your browser
 ```
 
-### Option B: Using Pip & Virtual Environment
-
+#### Option B: Using Pip & Virtual Environment
 ```bash
+cd Development/backend
+
 # 1. Create and activate a virtual environment
 python -m venv .venv
 .venv\Scripts\activate   # Linux/macOS: source .venv/bin/activate
@@ -208,6 +206,8 @@ python predict.py
 Deploy the microservice and web application inside an isolated container:
 
 ```bash
+cd Development/backend
+
 # 1. Build the Docker image
 docker build -t student-performance-prediction .
 
@@ -227,31 +227,23 @@ Student-Performance-Prediction/
 ├── data/
 │   └── stud.csv               # Kaggle student performance dataset (1,000 records)
 │
-├── Development/               # Modular development workspace
-│   ├── README.md              # Development workspace overview
-│   ├── frontend/              # Frontend web application source
+├── Development/               # 🛠️ Modular development workspace
+│   ├── README.md              # Development workspace setup & execution guide
+│   ├── frontend/              # 🎨 Frontend Web Application
 │   │   └── index.html         # Interactive single-file web dashboard
-│   └── backend/               # Backend ML & API services
+│   └── backend/               # ⚙️ Backend ML & REST API
 │       ├── predict.py         # Flask REST API microservice
-│       ├── predict_test.py    # Test client script
-│       ├── train.py           # Training pipeline
-│       ├── model.bin          # Serialized model artifact
-│       ├── Dockerfile         # Backend container definition
-│       ├── requirements.txt   # Pip dependencies
-│       └── pyproject.toml     # Poetry configuration
+│       ├── predict_test.py    # Automated test client script
+│       ├── train.py           # Training pipeline & Bayesian optimization
+│       ├── model.bin          # Trained Scikit-Learn / XGBoost pipeline artifact
+│       ├── Dockerfile         # Multi-stage container specification
+│       ├── requirements.txt   # Pip package dependencies
+│       ├── pyproject.toml     # Poetry packaging configuration
+│       └── poetry.lock        # Deterministic dependency lockfile
 │
 ├── index.html                 # Production Web App (serves GitHub Pages)
-├── DEVELOPMENT.md             # Comprehensive Developer & Engineering Guide
-├── notebook.ipynb             # Full exploratory data analysis, visualizations & experimentation
-├── train.py                   # Complete training, cross-validation & model serialization script
-├── predict.py                 # Production Flask REST API with Waitress WSGI & Web App serving
-├── predict_test.py            # Automated test client script for local verification
-├── model.bin                  # Serialized trained scikit-learn pipeline artifact
-├── Dockerfile                 # Production Docker container specification
-├── pyproject.toml             # Poetry packaging and dependency specifications
-├── poetry.lock                # Deterministic dependency lockfile
-├── requirements.txt           # Standard pip package requirements
-├── .gitignore                 # Optimized version control exclusions
+├── notebook.ipynb             # Full exploratory data analysis & model prediction experiments
+├── .gitignore                 # Version control exclusions
 ├── LICENSE                    # MIT Open Source License
 └── README.md                  # Comprehensive technical documentation
 ```

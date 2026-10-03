@@ -4,6 +4,7 @@
 ### *End-to-End Production Machine Learning Regression Pipeline, REST API & Interactive Web Application*
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-brightgreen?logo=githubpages&logoColor=white)](https://preyal2.github.io/Student-Performance-Prediction/)
+[![Developer Guide](https://img.shields.io/badge/Docs-DEVELOPMENT.md-purple.svg?logo=markdown&logoColor=white)](DEVELOPMENT.md)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.3.2-F7931E.svg?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-2.0.2-red.svg)](https://xgboost.readthedocs.io/)
@@ -17,9 +18,10 @@
   <b>A robust predictive intelligence pipeline and interactive web application that quantifies and forecasts student academic performance based on demographic, socioeconomic, and educational indicators using Bayesian-tuned regression ensembles deployed via a production-ready Flask microservice and GitHub Pages.</b>
 </p>
 
-### 🌐 [Click Here to Open the Live Web Application](https://preyal2.github.io/Student-Performance-Prediction/)
+### 🌐 [Click Here to Open the Live Web Application](https://preyal2.github.io/Student-Performance-Prediction/) • 🛠️ [Read Developer Guide (DEVELOPMENT.md)](DEVELOPMENT.md)
 
 [Live Web App](#-live-interactive-web-application) •
+[Developer Guide](#-developer--engineering-guide) •
 [Key Features](#-key-features) •
 [System Architecture](#-system-architecture) •
 [Exploratory Data Analysis](#-exploratory-data-analysis-eda) •
@@ -48,6 +50,21 @@ The system features a single-file, production-grade interactive dashboard deploy
 
 ---
 
+## 🛠️ Developer & Engineering Guide
+
+For comprehensive details on the local development workflow, dataset pipeline, Bayesian hyperparameter search, mathematical formulas, Docker commands, code standards, and cloud deployment options, check out the dedicated:
+
+📖 **[Read the Full Developer Guide (DEVELOPMENT.md)](DEVELOPMENT.md)**
+
+Highlights in the guide:
+- Complete step-by-step local setup with **Poetry** and **virtualenv**.
+- Detailed data transformation protocols and categorical feature mappings.
+- Bayesian optimization search spaces with 5-fold cross-validation.
+- Production serving protocols with multi-threaded **Waitress WSGI**.
+- Cloud deployment playbooks for **AWS Elastic Beanstalk** and **Google Cloud Run**.
+
+---
+
 ## 📌 Executive Summary & Problem Formulation
 
 In modern educational analytics, identifying students at risk of academic underperformance early allows educators and academic institutions to apply targeted educational interventions, optimize resource allocation, and provide personalized counseling.
@@ -73,6 +90,7 @@ The project covers the entire ML lifecycle: exploratory data analysis, automated
 - **🚀 Production REST API Microservice:** Built with Flask and served using the multi-threaded **Waitress WSGI** production server with built-in health checks (`/health`), batch prediction support, and static web serving.
 - **🐳 Cloud-Ready Docker Containerization:** Multi-stage, lightweight Docker configuration with non-root security principles and automated health monitoring.
 - **📦 Dual Dependency Packaging:** Supports both **Poetry** (`pyproject.toml`) and standard **pip** (`requirements.txt`).
+- **🛠️ Complete Contributor Documentation:** Exhaustive [DEVELOPMENT.md](DEVELOPMENT.md) with architecture diagrams, formulas, testing workflows, and cloud deployments.
 
 ---
 
@@ -246,6 +264,7 @@ Student-Performance-Prediction/
 │   └── stud.csv               # Kaggle student performance dataset (1,000 records)
 │
 ├── index.html                 # Self-contained interactive Web Application (Single-File)
+├── DEVELOPMENT.md             # Comprehensive Developer & Engineering Guide
 ├── notebook.ipynb             # Full exploratory data analysis, visualizations & experimentation
 ├── train.py                   # Complete training, cross-validation & model serialization script
 ├── predict.py                 # Production Flask REST API with Waitress WSGI & Web App serving

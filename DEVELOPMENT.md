@@ -1,4 +1,4 @@
-# 🛠️ Development & Engineering Guide
+﻿# 🛠️ Development & Engineering Guide
 ### *Comprehensive Contributor & Developer Documentation for Student Performance Prediction System*
 
 ---
@@ -369,4 +369,4 @@ gcloud run deploy student-performance-api \
 **Preyal Modi**
 - GitHub: [@preyal2](https://github.com/preyal2)
 - Portfolio: [Preyal Modi](https://github.com/preyal2/portfolio)
-- Email: [deepmodipre@gmail.com](mailto:deepmodipre@gmail.com)
+- Email: [modipreyal@gmail.com](mailto:modipreyal@gmail.com)

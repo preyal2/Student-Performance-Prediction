@@ -3,33 +3,28 @@
 # 🎯 Student Performance Prediction System
 ### *End-to-End Production Machine Learning Regression Pipeline, REST API & Interactive Web Application*
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-brightgreen?logo=githubpages&logoColor=white)](https://preyal2.github.io/Student-Performance-Prediction/)
-[![Developer Guide](https://img.shields.io/badge/Docs-DEVELOPMENT.md-purple.svg?logo=markdown&logoColor=white)](DEVELOPMENT.md)
+[![Live Deployment](https://img.shields.io/badge/Live%20Deployment-GitHub%20Pages-brightgreen?logo=githubpages&logoColor=white)](https://preyal2.github.io/Student-Performance-Prediction/)
+[![Model Prediction Notebook](https://img.shields.io/badge/Model%20Prediction-Jupyter%20Notebook-orange.svg?logo=jupyter&logoColor=white)](https://github.com/preyal2/Student-Performance-Prediction/blob/main/notebook.ipynb)
+[![Development Folder](https://img.shields.io/badge/Development-Frontend%20%26%20Backend-blueviolet.svg?logo=folder&logoColor=white)](Development/)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.3.2-F7931E.svg?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-2.0.2-red.svg)](https://xgboost.readthedocs.io/)
 [![CatBoost](https://img.shields.io/badge/CatBoost-1.2.2-yellow.svg)](https://catboost.ai/)
 [![Flask](https://img.shields.io/badge/Flask-3.0.0-000000.svg?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
 [![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED.svg?logo=docker&logoColor=white)](https://www.docker.com/)
-[![Poetry](https://img.shields.io/badge/Packaging-Poetry-blueviolet.svg?logo=poetry&logoColor=white)](https://python-poetry.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 <p align="center">
   <b>A robust predictive intelligence pipeline and interactive web application that quantifies and forecasts student academic performance based on demographic, socioeconomic, and educational indicators using Bayesian-tuned regression ensembles deployed via a production-ready Flask microservice and GitHub Pages.</b>
 </p>
 
-### 🌐 [Click Here to Open the Live Web Application](https://preyal2.github.io/Student-Performance-Prediction/) • 🛠️ [Read Developer Guide (DEVELOPMENT.md)](DEVELOPMENT.md)
-
-[Live Web App](#-live-interactive-web-application) •
-[Developer Guide](#-developer--engineering-guide) •
-[Key Features](#-key-features) •
-[System Architecture](#-system-architecture) •
-[Exploratory Data Analysis](#-exploratory-data-analysis-eda) •
-[Model Benchmarks](#-model-benchmarks--hyperparameter-tuning) •
-[REST API Reference](#-rest-api-reference) •
-[Getting Started](#-getting-started) •
-[Docker Deployment](#-docker-containerization) •
-[Project Structure](#-project-structure)
+### 🚀 Quick Access Links
+| Resource | Direct Link | Description |
+| :--- | :--- | :--- |
+| **🌐 Live Web Deployment** | [**preyal2.github.io/Student-Performance-Prediction**](https://preyal2.github.io/Student-Performance-Prediction/) | Interactive in-browser prediction application |
+| **📊 Model Prediction & EDA** | [**notebook.ipynb (GitHub Viewer)**](https://github.com/preyal2/Student-Performance-Prediction/blob/main/notebook.ipynb) | Complete data analysis, training & experimentation notebook |
+| **🛠️ Development Workspace** | [**Development/ Folder**](Development/) | Modular frontend & backend source code |
+| **📖 Developer Guide** | [**DEVELOPMENT.md**](DEVELOPMENT.md) | In-depth engineering specifications & setup playbook |
 
 ---
 
@@ -39,7 +34,7 @@
 
 The system features a single-file, production-grade interactive dashboard deployed directly on **GitHub Pages**:
 
-👉 **Live URL:** [https://preyal2.github.io/Student-Performance-Prediction/](https://preyal2.github.io/Student-Performance-Prediction/)
+👉 **Deployment Link:** [https://preyal2.github.io/Student-Performance-Prediction/](https://preyal2.github.io/Student-Performance-Prediction/)
 
 ### Web Application Capabilities
 - **⚡ Zero-Latency In-Browser Engine:** Uses mathematically aligned regression weights derived from the trained pipeline, allowing instantaneous real-time inference on any device without backend requirements.
@@ -50,18 +45,32 @@ The system features a single-file, production-grade interactive dashboard deploy
 
 ---
 
-## 🛠️ Developer & Engineering Guide
+## 🛠️ Development Folder Architecture (`Development/`)
 
-For comprehensive details on the local development workflow, dataset pipeline, Bayesian hyperparameter search, mathematical formulas, Docker commands, code standards, and cloud deployment options, check out the dedicated:
+The repository is modularly organized with a dedicated [`Development/`](Development/) directory containing both frontend and backend source files:
 
-📖 **[Read the Full Developer Guide (DEVELOPMENT.md)](DEVELOPMENT.md)**
+```
+Development/
+│
+├── frontend/
+│   └── index.html             # Interactive Web Application (Single-File)
+│                              # - In-browser mathematical regression engine
+│                              # - Responsive glassmorphic UI
+│                              # - Real-time score analytics & presets
+│                              # - Dual engine toggle (In-Browser / Flask API)
+│
+└── backend/
+    ├── predict.py             # Production Flask REST API & WSGI serving
+    ├── predict_test.py        # Automated endpoint test client
+    ├── train.py               # ML training, cross-validation & serialization
+    ├── model.bin              # Trained Scikit-Learn / XGBoost pipeline artifact
+    ├── Dockerfile             # Multi-stage container specification
+    ├── requirements.txt       # Standard pip package dependencies
+    ├── pyproject.toml         # Poetry packaging configuration
+    └── poetry.lock            # Deterministic dependency lockfile
+```
 
-Highlights in the guide:
-- Complete step-by-step local setup with **Poetry** and **virtualenv**.
-- Detailed data transformation protocols and categorical feature mappings.
-- Bayesian optimization search spaces with 5-fold cross-validation.
-- Production serving protocols with multi-threaded **Waitress WSGI**.
-- Cloud deployment playbooks for **AWS Elastic Beanstalk** and **Google Cloud Run**.
+👉 For detailed engineering workflows, see the [Development README](Development/README.md) and [DEVELOPMENT.md](DEVELOPMENT.md).
 
 ---
 
@@ -81,57 +90,12 @@ The project covers the entire ML lifecycle: exploratory data analysis, automated
 
 ---
 
-## ✨ Key Features
+## 📊 Model Prediction & EDA Highlights
 
-- **📊 Comprehensive EDA & Statistical Validation:** Distribution analysis, kernel density estimations (KDE), outlier checks, and multi-variable interaction modeling.
-- **⚙️ Modular Scikit-Learn Pipeline:** Seamless integration of `DictVectorizer` (one-hot encoding) and `StandardScaler` (feature scaling) alongside estimators to prevent data leakage.
-- **🏆 Multi-Model Regression Benchmark:** Exhaustive comparative analysis across Linear Regression, Ridge, Lasso, SVR, K-Nearest Neighbors, Decision Trees, Random Forest, AdaBoost, CatBoost, and XGBoost.
-- **🔍 Bayesian Hyperparameter Optimization:** Efficient search over complex parameter spaces utilizing `skopt.BayesSearchCV` with 5-fold cross-validation.
-- **🚀 Production REST API Microservice:** Built with Flask and served using the multi-threaded **Waitress WSGI** production server with built-in health checks (`/health`), batch prediction support, and static web serving.
-- **🐳 Cloud-Ready Docker Containerization:** Multi-stage, lightweight Docker configuration with non-root security principles and automated health monitoring.
-- **📦 Dual Dependency Packaging:** Supports both **Poetry** (`pyproject.toml`) and standard **pip** (`requirements.txt`).
-- **🛠️ Complete Contributor Documentation:** Exhaustive [DEVELOPMENT.md](DEVELOPMENT.md) with architecture diagrams, formulas, testing workflows, and cloud deployments.
-
----
-
-## 🏗️ System Architecture
-
-```mermaid
-flowchart TD
-    subgraph Data_Pipeline["1. Ingestion & Preprocessing"]
-        A["Raw Data (data/stud.csv)"] --> B["Data Validation & EDA"]
-        B --> C["Feature Engineering (Total & Average Scores)"]
-        C --> D["Feature Preprocessing Pipeline"]
-        D --> D1["DictVectorizer (One-Hot Encoding)"]
-        D --> D2["StandardScaler (Feature Normalization)"]
-    end
-
-    subgraph Model_Pipeline["2. Modeling & Bayesian Tuning"]
-        D1 & D2 --> E["Candidate Regressors"]
-        E --> E1["Linear / Ridge / Lasso"]
-        E --> E2["SVR / KNN / Decision Tree"]
-        E --> E3["RandomForest / AdaBoost"]
-        E --> E4["XGBoost / CatBoost"]
-        E1 & E2 & E3 & E4 --> F["BayesSearchCV (5-Fold Cross Validation)"]
-        F --> G["Optimal Pipeline Selection"]
-        G --> H["Model Serialization (model.bin)"]
-    end
-
-    subgraph Deployment_Pipeline["3. Serving & Delivery"]
-        H --> I["Flask REST API (predict.py)"]
-        I --> J["Waitress WSGI Server (Port 9696)"]
-        J --> K["Docker Container (Python 3.11-slim)"]
-        H --> L["Single-File Web App (index.html)"]
-        L --> M["GitHub Pages Live Deployment"]
-    end
-```
-
----
-
-## 📊 Exploratory Data Analysis (EDA)
+Explore the complete exploratory data analysis, visualizations, and model training trajectory in the interactive notebook:
+🔗 **[View Model Prediction Notebook](https://github.com/preyal2/Student-Performance-Prediction/blob/main/notebook.ipynb)**
 
 Key statistical findings derived during exploratory analysis of 1,000 student records:
-
 1. **Socioeconomic Impact (Lunch Subsidy):** Students receiving standard lunches consistently outperformed students receiving free or reduced lunches by an average of **11–13%** across all test categories, confirming socioeconomic factors strongly correlate with exam success.
 2. **Parental Education Gradient:** A direct monotonic relationship was observed between parental education and student achievement. Children of parents holding Master's or Bachelor's degrees achieved the highest median scores.
 3. **Test Preparation Course Effectiveness:** Students who completed the test preparation course exhibited statistically significant score improvements (average boost of **+7.5 points**), particularly in mathematics.
@@ -263,13 +227,25 @@ Student-Performance-Prediction/
 ├── data/
 │   └── stud.csv               # Kaggle student performance dataset (1,000 records)
 │
-├── index.html                 # Self-contained interactive Web Application (Single-File)
+├── Development/               # Modular development workspace
+│   ├── README.md              # Development workspace overview
+│   ├── frontend/              # Frontend web application source
+│   │   └── index.html         # Interactive single-file web dashboard
+│   └── backend/               # Backend ML & API services
+│       ├── predict.py         # Flask REST API microservice
+│       ├── predict_test.py    # Test client script
+│       ├── train.py           # Training pipeline
+│       ├── model.bin          # Serialized model artifact
+│       ├── Dockerfile         # Backend container definition
+│       ├── requirements.txt   # Pip dependencies
+│       └── pyproject.toml     # Poetry configuration
+│
+├── index.html                 # Production Web App (serves GitHub Pages)
 ├── DEVELOPMENT.md             # Comprehensive Developer & Engineering Guide
 ├── notebook.ipynb             # Full exploratory data analysis, visualizations & experimentation
 ├── train.py                   # Complete training, cross-validation & model serialization script
 ├── predict.py                 # Production Flask REST API with Waitress WSGI & Web App serving
 ├── predict_test.py            # Automated test client script for local verification
-│
 ├── model.bin                  # Serialized trained scikit-learn pipeline artifact
 ├── Dockerfile                 # Production Docker container specification
 ├── pyproject.toml             # Poetry packaging and dependency specifications
@@ -285,9 +261,9 @@ Student-Performance-Prediction/
 ## 👨‍💻 Author
 
 **Preyal Modi**
+- Email: [modipreyal@gmail.com](mailto:modipreyal@gmail.com)
 - GitHub: [@preyal2](https://github.com/preyal2)
 - Portfolio: [Preyal Modi](https://github.com/preyal2/portfolio)
-- Email: [deepmodipre@gmail.com](mailto:deepmodipre@gmail.com)
 
 ---
 

@@ -26,10 +26,10 @@ COPY pyproject.toml poetry.lock ./
 # Install project dependencies without dev packages
 RUN poetry install --no-root --without dev --no-interaction --no-ansi
 
-# Copy application files and serialized model
-COPY predict.py model.bin ./
+# Copy application files, web UI, and serialized model
+COPY predict.py model.bin index.html ./
 
-# Expose API port
+# Expose API & Web UI port
 EXPOSE 9696
 
 # Health check

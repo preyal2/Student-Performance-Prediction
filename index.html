@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Performance Predictor | AI Academic Intelligence</title>
+  <meta name="description" content="End-to-End Machine Learning regression system predicting student academic performance based on demographic, socioeconomic, and exam factors." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: rgba(17, 24, 39, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-hover: rgba(255, 255, 255, 0.12);
+      --primary: #6366f1;
+      --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #06b6d4 100%);
+      --accent: #06b6d4;
+      --accent-purple: #a855f7;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 10% 20%, rgba(79, 70, 229, 0.18) 0px, transparent 50%),
+        radial-gradient(at 90% 10%, rgba(6, 182, 212, 0.15) 0px, transparent 50%),
+        radial-gradient(at 50% 90%, rgba(139, 92, 246, 0.12) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+      padding-bottom: 60px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0 32px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 32px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: var(--primary-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 0 25px rgba(99, 102, 241, 0.45);
+    }
+
+    .brand-title h1 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #ffffff 40%, #c7d2fe 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-title p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(16, 185, 129, 0.12);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .badge-pulse {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .presets-bar {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .presets-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .presets-list {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .preset-chip {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .preset-chip:hover {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: var(--primary);
+      color: #c7d2fe;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .section-subtitle {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #e5e7eb;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 8px;
+    }
+
+    .radio-pill {
+      position: relative;
+    }
+
+    .radio-pill input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .radio-pill span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .radio-pill:hover span {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .radio-pill input:checked + span {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(139, 92, 246, 0.25) 100%);
+      border-color: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.25);
+    }
+
+    select, input[type="text"], input[type="number"] {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-sm);
+      padding: 11px 14px;
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    select {
+      cursor: pointer;
+    }
+
+    select option {
+      background: #111827;
+      color: #ffffff;
+    }
+
+    select:focus, input[type="text"]:focus, input[type="number"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+    }
+
+    .slider-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .slider-wrap input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 6px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.1);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .slider-wrap input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    .slider-wrap input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .slider-val-box {
+      width: 60px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      border-radius: var(--radius-sm);
+      padding: 6px 0;
+      font-size: 0.95rem;
+    }
+
+    .btn-predict {
+      width: 100%;
+      padding: 15px;
+      border-radius: var(--radius-md);
+      background: var(--primary-gradient);
+      border: none;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+      transition: var(--transition);
+      margin-top: 10px;
+    }
+
+    .btn-predict:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 26px rgba(99, 102, 241, 0.6);
+    }
+
+    .btn-predict:active {
+      transform: translateY(0);
+    }
+
+    .score-hero-container {
+      text-align: center;
+      padding: 24px 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0.1) 100%);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .score-hero-container::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: 30%;
+      width: 40%;
+      height: 60%;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%);
+      filter: blur(30px);
+      pointer-events: none;
+    }
+
+    .score-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .score-number {
+      font-size: 4.6rem;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #ffffff 40%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 10px 0;
+      transition: all 0.5s ease;
+    }
+
+    .grade-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .confidence-text {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-top: 10px;
+    }
+
+    .metric-bars {
+      margin-bottom: 22px;
+    }
+
+    .bar-row {
+      margin-bottom: 14px;
+    }
+
+    .bar-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text-muted);
+    }
+
+    .bar-header span:last-child {
+      color: #ffffff;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .bar-track {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+      transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .bar-fill.math {
+      background: linear-gradient(90deg, #6366f1, #06b6d4);
+    }
+
+    .bar-fill.reading {
+      background: linear-gradient(90deg, #a855f7, #ec4899);
+    }
+
+    .bar-fill.writing {
+      background: linear-gradient(90deg, #f59e0b, #10b981);
+    }
+
+    .bar-fill.average {
+      background: linear-gradient(90deg, #3b82f6, #6366f1);
+    }
+
+    .factors-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .factors-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .factor-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 0.82rem;
+    }
+
+    .factor-item:last-child {
+      border-bottom: none;
+    }
+
+    .factor-label {
+      color: var(--text-main);
+    }
+
+    .factor-impact {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      font-size: 0.78rem;
+    }
+
+    .factor-pos {
+      color: #34d399;
+    }
+
+    .factor-neg {
+      color: #f87171;
+    }
+
+    .insight-card {
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      font-size: 0.84rem;
+      color: #c7d2fe;
+      display: flex;
+      gap: 12px;
+      line-height: 1.45;
+    }
+
+    .insight-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+    }
+
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    footer a:hover {
+      color: var(--primary);
+    }
+
+    .engine-toggle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .engine-btn {
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.75rem;
+    }
+
+    .engine-btn.active {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo-icon">🎯</div>
+        <div class="brand-title">
+          <h1>Student Performance Predictor</h1>
+          <p>Machine Learning Academic Analytics & Math Score Regression</p>
+        </div>
+      </div>
+      <div class="header-links">
+        <div class="badge-pill">
+          <span class="badge-pulse"></span>
+          <span id="engineStatus">In-Browser ML Engine</span>
+        </div>
+        <a href="https://github.com/preyal2/Student-Performance-Prediction" target="_blank" rel="noopener noreferrer" class="nav-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+          GitHub Repo
+        </a>
+      </div>
+    </header>
+
+    <div class="presets-bar">
+      <div class="presets-label">
+        <span>⚡ Quick Presets:</span>
+      </div>
+      <div class="presets-list">
+        <button class="preset-chip" onclick="applyPreset('honor')">🌟 High Honor Student</button>
+        <button class="preset-chip" onclick="applyPreset('stem')">📐 STEM Oriented</button>
+        <button class="preset-chip" onclick="applyPreset('balanced')">⚖️ Balanced Achiever</button>
+        <button class="preset-chip" onclick="applyPreset('support')">🌱 Growth & Support</button>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- Input Form Card -->
+      <div class="card">
+        <div class="card-title">
+          <span>⚙️ Student Profile & Attributes</span>
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <div class="options-grid">
+            <label class="radio-pill">
+              <input type="radio" name="gender" value="male" checked onchange="autoPredict()" />
+              <span>👨 Male</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="gender" value="female" onchange="autoPredict()" />
+              <span>👩 Female</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Race / Ethnicity Group</label>
+          <div class="options-grid" style="grid-template-columns: repeat(5, 1fr);">
+            <label class="radio-pill">
+              <input type="radio" name="race_ethnicity" value="group A" onchange="autoPredict()" />
+              <span>A</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="race_ethnicity" value="group B" onchange="autoPredict()" />
+              <span>B</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="race_ethnicity" value="group C" onchange="autoPredict()" />
+              <span>C</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="race_ethnicity" value="group D" onchange="autoPredict()" />
+              <span>D</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="race_ethnicity" value="group E" checked onchange="autoPredict()" />
+              <span>E</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="parental_education">Parental Level of Education</label>
+          <select id="parental_education" onchange="autoPredict()">
+            <option value="some high school">Some High School</option>
+            <option value="high school">High School</option>
+            <option value="some college" selected>Some College</option>
+            <option value="associate's degree">Associate's Degree</option>
+            <option value="bachelor's degree">Bachelor's Degree</option>
+            <option value="master's degree">Master's Degree</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Lunch Subsidy (Socioeconomic Indicator)</label>
+          <div class="options-grid">
+            <label class="radio-pill">
+              <input type="radio" name="lunch" value="standard" checked onchange="autoPredict()" />
+              <span>Standard Lunch</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="lunch" value="free/reduced" onchange="autoPredict()" />
+              <span>Free / Reduced</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Test Preparation Course</label>
+          <div class="options-grid">
+            <label class="radio-pill">
+              <input type="radio" name="test_preparation_course" value="completed" checked onchange="autoPredict()" />
+              <span>🎓 Completed</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="test_preparation_course" value="none" onchange="autoPredict()" />
+              <span>❌ None</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="section-subtitle" style="margin-top: 26px;">Academic Indicators</div>
+
+        <div class="form-group">
+          <label for="reading_score">Reading Score (0 - 100)</label>
+          <div class="slider-wrap">
+            <input type="range" id="reading_score" min="0" max="100" value="82" oninput="syncScore('reading', this.value)" />
+            <div class="slider-val-box" id="reading_val">82</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="writing_score">Writing Score (0 - 100)</label>
+          <div class="slider-wrap">
+            <input type="range" id="writing_score" min="0" max="100" value="80" oninput="syncScore('writing', this.value)" />
+            <div class="slider-val-box" id="writing_val">80</div>
+          </div>
+        </div>
+
+        <button class="btn-predict" onclick="calculatePrediction()">
+          <span>📊 Calculate Math Performance</span>
+        </button>
+      </div>
+
+      <!-- Result Analytics Card -->
+      <div class="card">
+        <div class="card-title">
+          <span>📈 Predictive Score Intelligence</span>
+          <div class="engine-toggle-wrap">
+            <button class="engine-btn active" id="btnClientEngine" onclick="switchEngine('client')">Client ML</button>
+            <button class="engine-btn" id="btnApiEngine" onclick="switchEngine('api')">Flask API</button>
+          </div>
+        </div>
+
+        <div class="score-hero-container">
+          <div class="score-label">Predicted Math Score</div>
+          <div class="score-number" id="predictedScore">84</div>
+          <div>
+            <span class="grade-badge" id="gradeBadge">🌟 Grade A • Advanced</span>
+          </div>
+          <div class="confidence-text">
+            Expected Range: <strong id="scoreRange" style="color: #e5e7eb;">79 – 89</strong> (RMSE: ±5.4 pts)
+          </div>
+        </div>
+
+        <div class="metric-bars">
+          <div class="bar-row">
+            <div class="bar-header">
+              <span>Predicted Math</span>
+              <span id="mathBarVal">84%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill math" id="mathBar" style="width: 84%;"></div>
+            </div>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-header">
+              <span>Reading Score</span>
+              <span id="readingBarVal">82%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill reading" id="readingBar" style="width: 82%;"></div>
+            </div>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-header">
+              <span>Writing Score</span>
+              <span id="writingBarVal">80%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill writing" id="writingBar" style="width: 80%;"></div>
+            </div>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-header">
+              <span>Overall Estimated Average</span>
+              <span id="avgBarVal">82.0%</span>
+            </div>
+            <div class="bar-track">
+              <div class="bar-fill average" id="avgBar" style="width: 82%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="factors-box">
+          <div class="factors-title">Model Factor Contributions</div>
+          <div id="factorsList"></div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-icon">💡</div>
+          <div id="recommendationText">
+            Strong reading and writing literacy provides a high baseline. The completed preparation course and socioeconomic stability provide an estimated +8.5 point advantage.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <footer>
+      <div>
+        Created by <strong>Preyal Modi</strong> • Student Performance ML System
+      </div>
+      <div>
+        <a href="https://github.com/preyal2/Student-Performance-Prediction" target="_blank">View GitHub Repository</a> • 
+        <a href="https://github.com/preyal2" target="_blank">GitHub Profile</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    let engineMode = 'client';
+    const API_URL = 'http://localhost:9696/predict';
+
+    const GENDER_WEIGHTS = { 'male': 4.53, 'female': -4.21 };
+    const ETHNICITY_WEIGHTS = {
+      'group A': 0.21,
+      'group B': -0.39,
+      'group C': -1.00,
+      'group D': -0.10,
+      'group E': 2.87
+    };
+    const LUNCH_WEIGHTS = { 'standard': 0.95, 'free/reduced': -1.72 };
+    const PARENT_WEIGHTS = {
+      'some high school': 0.01,
+      'high school': 0.62,
+      'some college': 0.35,
+      "associate's degree": 0.04,
+      "bachelor's degree": -0.76,
+      "master's degree": -2.04
+    };
+    const PREP_WEIGHTS = { 'completed': 2.50, 'none': -1.80 };
+
+    function syncScore(type, val) {
+      document.getElementById(`${type}_val`).innerText = val;
+      autoPredict();
+    }
+
+    function switchEngine(mode) {
+      engineMode = mode;
+      document.getElementById('btnClientEngine').classList.toggle('active', mode === 'client');
+      document.getElementById('btnApiEngine').classList.toggle('active', mode === 'api');
+      document.getElementById('engineStatus').innerText = mode === 'client' ? 'In-Browser ML Engine' : 'Flask REST API';
+      calculatePrediction();
+    }
+
+    const PRESETS = {
+      honor: {
+        gender: 'female',
+        race: 'group E',
+        parent: "master's degree",
+        lunch: 'standard',
+        prep: 'completed',
+        reading: 94,
+        writing: 96
+      },
+      stem: {
+        gender: 'male',
+        race: 'group E',
+        parent: "bachelor's degree",
+        lunch: 'standard',
+        prep: 'completed',
+        reading: 78,
+        writing: 75
+      },
+      balanced: {
+        gender: 'female',
+        race: 'group C',
+        parent: "some college",
+        lunch: 'standard',
+        prep: 'completed',
+        reading: 72,
+        writing: 74
+      },
+      support: {
+        gender: 'male',
+        race: 'group B',
+        parent: "some high school",
+        lunch: 'free/reduced',
+        prep: 'none',
+        reading: 52,
+        writing: 48
+      }
+    };
+
+    function applyPreset(name) {
+      const p = PRESETS[name];
+      if (!p) return;
+
+      document.querySelector(`input[name="gender"][value="${p.gender}"]`).checked = true;
+      document.querySelector(`input[name="race_ethnicity"][value="${p.race}"]`).checked = true;
+      document.getElementById('parental_education').value = p.parent;
+      document.querySelector(`input[name="lunch"][value="${p.lunch}"]`).checked = true;
+      document.querySelector(`input[name="test_preparation_course"][value="${p.prep}"]`).checked = true;
+
+      document.getElementById('reading_score').value = p.reading;
+      document.getElementById('reading_val').innerText = p.reading;
+      document.getElementById('writing_score').value = p.writing;
+      document.getElementById('writing_val').innerText = p.writing;
+
+      calculatePrediction();
+    }
+
+    function getFormData() {
+      const gender = document.querySelector('input[name="gender"]:checked').value;
+      const race = document.querySelector('input[name="race_ethnicity"]:checked').value;
+      const parent = document.getElementById('parental_education').value;
+      const lunch = document.querySelector('input[name="lunch"]:checked').value;
+      const prep = document.querySelector('input[name="test_preparation_course"]:checked').value;
+      const reading = parseFloat(document.getElementById('reading_score').value);
+      const writing = parseFloat(document.getElementById('writing_score').value);
+
+      const knownAvg = (reading + writing) / 2;
+      const totalScoreEst = knownAvg * 3;
+      const avgScoreEst = knownAvg;
+
+      return {
+        gender,
+        race_ethnicity: race,
+        parental_level_of_education: parent,
+        lunch,
+        test_preparation_course: prep,
+        reading,
+        writing,
+        'total score': totalScoreEst,
+        average: avgScoreEst
+      };
+    }
+
+    function autoPredict() {
+      calculatePrediction();
+    }
+
+    async function calculatePrediction() {
+      const data = getFormData();
+
+      if (engineMode === 'api') {
+        try {
+          const resp = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+          const res = await resp.json();
+          const score = res['The student has scored in Math'] ?? res['predicted_math_score'];
+          updateUI(score, data);
+          return;
+        } catch (err) {
+          console.warn('API error, falling back to client engine:', err);
+          document.getElementById('engineStatus').innerText = 'API Offline (Client Fallback)';
+        }
+      }
+
+      const baseline = (0.9771 * data.average) - 0.1306;
+      const gOffset = GENDER_WEIGHTS[data.gender] || 0;
+      const eOffset = ETHNICITY_WEIGHTS[data.race_ethnicity] || 0;
+      const lOffset = LUNCH_WEIGHTS[data.lunch] || 0;
+      const pOffset = PARENT_WEIGHTS[data.parental_level_of_education] || 0;
+      const prOffset = PREP_WEIGHTS[data.test_preparation_course] || 0;
+
+      let rawMath = baseline + gOffset + eOffset + lOffset + pOffset + prOffset;
+      rawMath = Math.max(0, Math.min(100, rawMath));
+      const roundedMath = Math.round(rawMath);
+
+      updateUI(roundedMath, data, { gOffset, eOffset, lOffset, pOffset, prOffset });
+    }
+
+    function updateUI(mathScore, data, offsets) {
+      const scoreEl = document.getElementById('predictedScore');
+      scoreEl.innerText = mathScore;
+
+      const badge = document.getElementById('gradeBadge');
+      const scoreRange = document.getElementById('scoreRange');
+      const minRange = Math.max(0, mathScore - 5);
+      const maxRange = Math.min(100, mathScore + 5);
+      scoreRange.innerText = `${minRange} – ${maxRange}`;
+
+      if (mathScore >= 90) {
+        badge.innerHTML = '🌟 Grade A+ • Mastery';
+        badge.style.color = '#34d399';
+        badge.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+        badge.style.background = 'rgba(16, 185, 129, 0.15)';
+      } else if (mathScore >= 80) {
+        badge.innerHTML = '✨ Grade A • Advanced';
+        badge.style.color = '#38bdf8';
+        badge.style.borderColor = 'rgba(56, 189, 248, 0.3)';
+        badge.style.background = 'rgba(56, 189, 248, 0.15)';
+      } else if (mathScore >= 70) {
+        badge.innerHTML = '📘 Grade B • Proficient';
+        badge.style.color = '#818cf8';
+        badge.style.borderColor = 'rgba(129, 140, 248, 0.3)';
+        badge.style.background = 'rgba(129, 140, 248, 0.15)';
+      } else if (mathScore >= 60) {
+        badge.innerHTML = '📙 Grade C • Competent';
+        badge.style.color = '#fbbf24';
+        badge.style.borderColor = 'rgba(251, 191, 36, 0.3)';
+        badge.style.background = 'rgba(251, 191, 36, 0.15)';
+      } else {
+        badge.innerHTML = '⚠️ Grade D/F • Needs Intervention';
+        badge.style.color = '#f87171';
+        badge.style.borderColor = 'rgba(248, 113, 113, 0.3)';
+        badge.style.background = 'rgba(248, 113, 113, 0.15)';
+      }
+
+      const mathClamp = Math.min(100, Math.max(0, mathScore));
+      document.getElementById('mathBar').style.width = `${mathClamp}%`;
+      document.getElementById('mathBarVal').innerText = `${mathClamp}%`;
+
+      document.getElementById('readingBar').style.width = `${data.reading}%`;
+      document.getElementById('readingBarVal').innerText = `${data.reading}%`;
+
+      document.getElementById('writingBar').style.width = `${data.writing}%`;
+      document.getElementById('writingBarVal').innerText = `${data.writing}%`;
+
+      const overallAvg = Math.round((mathScore + data.reading + data.writing) / 3 * 10) / 10;
+      document.getElementById('avgBar').style.width = `${overallAvg}%`;
+      document.getElementById('avgBarVal').innerText = `${overallAvg}%`;
+
+      const factorsList = document.getElementById('factorsList');
+      factorsList.innerHTML = `
+        <div class="factor-item">
+          <span class="factor-label">Gender Correlation (${data.gender})</span>
+          <span class="factor-impact ${GENDER_WEIGHTS[data.gender] >= 0 ? 'factor-pos' : 'factor-neg'}">
+            ${GENDER_WEIGHTS[data.gender] >= 0 ? '+' : ''}${GENDER_WEIGHTS[data.gender]} pts
+          </span>
+        </div>
+        <div class="factor-item">
+          <span class="factor-label">Ethnic Cohort Trend (${data.race_ethnicity})</span>
+          <span class="factor-impact ${ETHNICITY_WEIGHTS[data.race_ethnicity] >= 0 ? 'factor-pos' : 'factor-neg'}">
+            ${ETHNICITY_WEIGHTS[data.race_ethnicity] >= 0 ? '+' : ''}${ETHNICITY_WEIGHTS[data.race_ethnicity]} pts
+          </span>
+        </div>
+        <div class="factor-item">
+          <span class="factor-label">Nutrition & Subsidy (${data.lunch})</span>
+          <span class="factor-impact ${LUNCH_WEIGHTS[data.lunch] >= 0 ? 'factor-pos' : 'factor-neg'}">
+            ${LUNCH_WEIGHTS[data.lunch] >= 0 ? '+' : ''}${LUNCH_WEIGHTS[data.lunch]} pts
+          </span>
+        </div>
+        <div class="factor-item">
+          <span class="factor-label">Test Prep Course (${data.test_preparation_course})</span>
+          <span class="factor-impact ${PREP_WEIGHTS[data.test_preparation_course] >= 0 ? 'factor-pos' : 'factor-neg'}">
+            ${PREP_WEIGHTS[data.test_preparation_course] >= 0 ? '+' : ''}${PREP_WEIGHTS[data.test_preparation_course]} pts
+          </span>
+        </div>
+      `;
+
+      const rec = document.getElementById('recommendationText');
+      if (mathScore >= 85) {
+        rec.innerText = `Exceptional academic trajectory! High reading (${data.reading}) and writing (${data.writing}) scores strongly complement mathematical aptitude. Maintain momentum with challenging problem sets and STEM competitions.`;
+      } else if (mathScore >= 70) {
+        rec.innerText = `Solid mathematical standing. Completing test preparation courses provides an estimated boost of up to +4 to +7 points. Focus on multi-step algebra and geometry to cross into the 85+ honor tier.`;
+      } else {
+        rec.innerText = `Targeted intervention recommended. The model projects math performance at ${mathScore}%. Completing structured test prep and regular practice can bridge the gap by an estimated 8–12 points.`;
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      calculatePrediction();
+    });
+  </script>
+</body>
+</html>

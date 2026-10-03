@@ -1,5 +1,5 @@
 ﻿"""
-Student Performance Prediction - Production REST API
+Student Performance Prediction - Production REST API & Web App Serving
 Author: Preyal Modi
 """
 
@@ -16,9 +16,22 @@ with open(MODEL_FILE, "rb") as f_in:
 app = Flask("Student_Performance_Prediction")
 
 
+@app.after_request
+def add_cors_headers(response):
+    """Enable Cross-Origin Resource Sharing (CORS) for web app clients."""
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,OPTIONS"
+    return response
+
+
 @app.route("/", methods=["GET"])
 def index():
-    """Service health and info endpoint."""
+    """Serve the interactive web application frontend or API metadata."""
+    index_path = os.path.join(os.path.dirname(__file__), "index.html")
+    if os.path.exists(index_path):
+        with open(index_path, "r", encoding="utf-8") as f:
+            return f.read(), 200, {"Content-Type": "text/html; charset=utf-8"}
     return jsonify({
         "status": "healthy",
         "service": "Student Performance Prediction API",
@@ -36,9 +49,12 @@ def health():
     return jsonify({"status": "UP", "model_loaded": model is not None}), 200
 
 
-@app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=["POST", "OPTIONS"])
 def predict():
     """Predict math score based on demographic and academic features."""
+    if request.method == "OPTIONS":
+        return "", 204
+
     try:
         individual = request.get_json(force=True)
         if individual is None:

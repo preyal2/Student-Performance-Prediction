@@ -1,8 +1,9 @@
-﻿<div align="center">
+<div align="center">
 
 # 🎯 Student Performance Prediction System
-### *End-to-End Production Machine Learning Regression Pipeline & Containerized REST API*
+### *End-to-End Production Machine Learning Regression Pipeline, REST API & Interactive Web Application*
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-brightgreen?logo=githubpages&logoColor=white)](https://preyal2.github.io/Student-Performance-Prediction/)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.3.2-F7931E.svg?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-2.0.2-red.svg)](https://xgboost.readthedocs.io/)
@@ -13,9 +14,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 <p align="center">
-  <b>A robust predictive intelligence pipeline that quantifies and forecasts student academic performance based on demographic, socioeconomic, and educational indicators using Bayesian-tuned regression ensembles deployed via a production-ready Flask microservice.</b>
+  <b>A robust predictive intelligence pipeline and interactive web application that quantifies and forecasts student academic performance based on demographic, socioeconomic, and educational indicators using Bayesian-tuned regression ensembles deployed via a production-ready Flask microservice and GitHub Pages.</b>
 </p>
 
+### 🌐 [Click Here to Open the Live Web Application](https://preyal2.github.io/Student-Performance-Prediction/)
+
+[Live Web App](#-live-interactive-web-application) •
 [Key Features](#-key-features) •
 [System Architecture](#-system-architecture) •
 [Exploratory Data Analysis](#-exploratory-data-analysis-eda) •
@@ -28,6 +32,21 @@
 ---
 
 </div>
+
+## 🌐 Live Interactive Web Application
+
+The system features a single-file, production-grade interactive dashboard deployed directly on **GitHub Pages**:
+
+👉 **Live URL:** [https://preyal2.github.io/Student-Performance-Prediction/](https://preyal2.github.io/Student-Performance-Prediction/)
+
+### Web Application Capabilities
+- **⚡ Zero-Latency In-Browser Engine:** Uses mathematically aligned regression weights derived from the trained pipeline, allowing instantaneous real-time inference on any device without backend requirements.
+- **🔄 Dual Execution Modes:** Easily toggle between the client-side browser engine and the local/remote multi-threaded Flask REST API (`http://localhost:9696/predict`).
+- **🎯 1-Click Persona Presets:** Pre-configured student archetypes (*High Honor Student*, *STEM Oriented*, *Balanced Achiever*, *Growth & Support*) for instant exploration.
+- **📊 Real-Time Visual Metrics:** Score meter, performance tier badges (A+ Mastery down to Needs Intervention), comparative progress bars (Math vs Reading vs Writing vs Average), and factor impact breakdowns.
+- **📄 Single-File Architecture:** Built entirely into a single [`index.html`](index.html) file combining semantic HTML5, glassmorphic CSS, and responsive JavaScript.
+
+---
 
 ## 📌 Executive Summary & Problem Formulation
 
@@ -51,7 +70,7 @@ The project covers the entire ML lifecycle: exploratory data analysis, automated
 - **⚙️ Modular Scikit-Learn Pipeline:** Seamless integration of `DictVectorizer` (one-hot encoding) and `StandardScaler` (feature scaling) alongside estimators to prevent data leakage.
 - **🏆 Multi-Model Regression Benchmark:** Exhaustive comparative analysis across Linear Regression, Ridge, Lasso, SVR, K-Nearest Neighbors, Decision Trees, Random Forest, AdaBoost, CatBoost, and XGBoost.
 - **🔍 Bayesian Hyperparameter Optimization:** Efficient search over complex parameter spaces utilizing `skopt.BayesSearchCV` with 5-fold cross-validation.
-- **🚀 Production REST API Microservice:** Built with Flask and served using the multi-threaded **Waitress WSGI** production server with built-in health checks (`/health`) and batch prediction support.
+- **🚀 Production REST API Microservice:** Built with Flask and served using the multi-threaded **Waitress WSGI** production server with built-in health checks (`/health`), batch prediction support, and static web serving.
 - **🐳 Cloud-Ready Docker Containerization:** Multi-stage, lightweight Docker configuration with non-root security principles and automated health monitoring.
 - **📦 Dual Dependency Packaging:** Supports both **Poetry** (`pyproject.toml`) and standard **pip** (`requirements.txt`).
 
@@ -80,11 +99,12 @@ flowchart TD
         G --> H["Model Serialization (model.bin)"]
     end
 
-    subgraph Deployment_Pipeline["3. Serving & Containerization"]
+    subgraph Deployment_Pipeline["3. Serving & Delivery"]
         H --> I["Flask REST API (predict.py)"]
         I --> J["Waitress WSGI Server (Port 9696)"]
         J --> K["Docker Container (Python 3.11-slim)"]
-        K --> L["Client Consumption (cURL / Python / Frontend)"]
+        H --> L["Single-File Web App (index.html)"]
+        L --> M["GitHub Pages Live Deployment"]
     end
 ```
 
@@ -117,15 +137,17 @@ All models were evaluated under identical 5-fold cross-validation splits using R
 | **K-Nearest Neighbors (KNN)** | 0.8420 | 0.8120 | 6.74 | 5.30 |
 | **Decision Tree Regressor** | 0.9998 | 0.7410 | 7.91 | 6.20 |
 
-> **Selection:** The regularized Linear Regression pipeline with Bayesian hyperparameter tuning achieved the highest generalization score ($R^2 \approx 0.88$) with the lowest test error, eliminating overfitting present in unconstrained tree ensembles.
-
 ---
 
 ## 🔌 REST API Reference
 
 The serving microservice exposes clean RESTful endpoints running on port `9696`.
 
-### 1. Health Check
+### 1. Web Application & Info
+- **Endpoint:** `GET /`
+- **Description:** Returns the interactive web frontend (`index.html`) or API service status.
+
+### 2. Health Check
 - **Endpoint:** `GET /health`
 - **Response:**
   ```json
@@ -135,7 +157,7 @@ The serving microservice exposes clean RESTful endpoints running on port `9696`.
   }
   ```
 
-### 2. Predict Math Score
+### 3. Predict Math Score
 - **Endpoint:** `POST /predict`
 - **Headers:** `Content-Type: application/json`
 
@@ -161,16 +183,9 @@ The serving microservice exposes clean RESTful endpoints running on port `9696`.
 }
 ```
 
-*(Batch predictions are also supported by passing a JSON array of student objects).*
-
 ---
 
 ## 🚀 Getting Started
-
-### Prerequisites
-- Python 3.11+
-- [Poetry](https://python-poetry.org/) (Recommended) or standard `pip`
-- [Docker](https://www.docker.com/) (Optional, for containerized execution)
 
 ### Option A: Using Poetry (Recommended)
 
@@ -182,8 +197,10 @@ cd Student-Performance-Prediction
 # 2. Install dependencies via Poetry
 poetry install
 
-# 3. Launch the prediction microservice
+# 3. Launch the prediction microservice and Web UI
 poetry run python -m waitress --listen=0.0.0.0:9696 predict:app
+
+# 4. Open http://localhost:9696 in your browser
 ```
 
 ### Option B: Using Pip & Virtual Environment
@@ -191,46 +208,22 @@ poetry run python -m waitress --listen=0.0.0.0:9696 predict:app
 ```bash
 # 1. Create and activate a virtual environment
 python -m venv .venv
-
-# Windows
-.venv\Scripts\activate
-# Linux/macOS
-source .venv/bin/activate
+.venv\Scripts\activate   # Linux/macOS: source .venv/bin/activate
 
 # 2. Install required packages
 pip install -r requirements.txt
 
 # 3. Start the Flask application
 python predict.py
-```
 
-### Verify with Client Test Script
-
-In another terminal, test the running prediction service:
-```bash
-python predict_test.py
-```
-
-Or using `curl`:
-```bash
-curl -X POST http://localhost:9696/predict \
-  -H "Content-Type: application/json" \
-  -d '{
-    "gender": "female",
-    "race_ethnicity": "group B",
-    "parental_level_of_education": "bachelor'\''s degree",
-    "lunch": "standard",
-    "test_preparation_course": "none",
-    "total score": 218,
-    "average": 72.67
-  }'
+# 4. Navigate to http://localhost:9696
 ```
 
 ---
 
 ## 🐳 Docker Containerization
 
-Deploy the microservice inside an isolated container with Waitress WSGI:
+Deploy the microservice and web application inside an isolated container:
 
 ```bash
 # 1. Build the Docker image
@@ -239,11 +232,7 @@ docker build -t student-performance-prediction .
 # 2. Run the container
 docker run -d -p 9696:9696 --name student-predictor student-performance-prediction
 
-# 3. Test health status
-curl http://localhost:9696/health
-
-# 4. Stop the container
-docker stop student-predictor
+# 3. Open http://localhost:9696 in your browser
 ```
 
 ---
@@ -256,9 +245,10 @@ Student-Performance-Prediction/
 ├── data/
 │   └── stud.csv               # Kaggle student performance dataset (1,000 records)
 │
+├── index.html                 # Self-contained interactive Web Application (Single-File)
 ├── notebook.ipynb             # Full exploratory data analysis, visualizations & experimentation
 ├── train.py                   # Complete training, cross-validation & model serialization script
-├── predict.py                 # Production Flask REST API with Waitress WSGI serving
+├── predict.py                 # Production Flask REST API with Waitress WSGI & Web App serving
 ├── predict_test.py            # Automated test client script for local verification
 │
 ├── model.bin                  # Serialized trained scikit-learn pipeline artifact

@@ -5,6 +5,7 @@
 
 [![Live Deployment](https://img.shields.io/badge/Live%20Deployment-GitHub%20Pages-brightgreen?logo=githubpages&logoColor=white)](https://preyal2.github.io/Student-Performance-Prediction/Development/frontend/)
 [![Model Prediction Notebook](https://img.shields.io/badge/Model%20Prediction-Jupyter%20Notebook-orange.svg?logo=jupyter&logoColor=white)](https://github.com/preyal2/Student-Performance-Prediction/blob/main/notebook.ipynb)
+[![Academic Project Report](https://img.shields.io/badge/Project%20Report-GTU%20Academic%20Format-blue.svg?logo=googledocs&logoColor=white)](PROJECT_REPORT.md)
 [![Development Workspace](https://img.shields.io/badge/Development-Frontend%20%26%20Backend-blueviolet.svg?logo=folder&logoColor=white)](Development/)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![Scikit-Learn](https://img.shields.io/badge/scikit--learn-1.3.2-F7931E.svg?logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
@@ -24,6 +25,7 @@
 | **🌐 Live Web Deployment** | [**preyal2.github.io/Student-Performance-Prediction/Development/frontend/**](https://preyal2.github.io/Student-Performance-Prediction/Development/frontend/) | Interactive in-browser prediction application |
 | **📊 Model Prediction & EDA** | [**notebook.ipynb (GitHub Viewer)**](https://github.com/preyal2/Student-Performance-Prediction/blob/main/notebook.ipynb) | Complete data analysis, training & experimentation notebook |
 | **🛠️ Development Workspace** | [**Development/ Folder**](Development/) | Modular frontend & backend source code with full engineering guide |
+| **📑 Academic Report** | [**PROJECT_REPORT.md**](PROJECT_REPORT.md) | Complete 18-section academic micro-project report |
 
 ---
 
@@ -244,6 +246,7 @@ Student-Performance-Prediction/
 │       └── poetry.lock        # Deterministic lockfile
 │
 ├── notebook.ipynb             # Full exploratory data analysis & model prediction experiments
+├── PROJECT_REPORT.md          # Complete academic micro-project report (GTU format)
 ├── .gitignore                 # Version control exclusions
 ├── LICENSE                    # MIT Open Source License (Preyal Modi)
 └── README.md                  # Comprehensive technical documentation & quick access links
